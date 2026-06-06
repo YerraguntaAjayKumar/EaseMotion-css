@@ -52,7 +52,7 @@
 }
 
 .ease-hover-grow {
-  transition: transform var(--ease-transition-bounce-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease-bounce);
   will-change: transform;
 }
 .ease-hover-grow:hover {
@@ -60,8 +60,8 @@
 }
 
 .ease-hover-lift-shadow {
-  transition: transform var(--ease-transition-medium),
-              box-shadow var(--ease-transition-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease),
+              box-shadow var(--ease-speed-medium) var(--ease-ease);
   will-change: transform, box-shadow;
 }
 .ease-hover-lift-shadow:hover {
@@ -71,7 +71,7 @@
 }
 
 .ease-hover-shrink {
-  transition: transform var(--ease-transition-fast);
+  transition: transform var(--ease-speed-fast) var(--ease-ease);
   will-change: transform;
 }
 .ease-hover-shrink:hover {
@@ -79,15 +79,15 @@
 }
 
 .ease-hover-glow {
-  transition: box-shadow var(--ease-transition-medium);
+  transition: box-shadow var(--ease-speed-medium) var(--ease-ease);
 }
 .ease-hover-glow:hover {
   box-shadow: var(--ease-glow-primary);
 }
 
 .ease-hover-lift {
-  transition: transform var(--ease-transition-medium),
-              box-shadow var(--ease-transition-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease),
+              box-shadow var(--ease-speed-medium) var(--ease-ease);
 }
 .ease-hover-lift:hover {
   transform: translateY(-4px);
@@ -105,7 +105,7 @@
   width: 0;
   height: 2px;
   background-color: var(--ease-color-primary);
-  transition: width var(--ease-transition-medium);
+  transition: width var(--ease-speed-medium) var(--ease-ease);
 }
 .ease-hover-underline:hover::after {
   width: 100%;
@@ -139,7 +139,7 @@
     rgba(255, 255, 255, 0.08) 50%,
     transparent 100%
   );
-  transition: left var(--ease-transition-slow);
+  transition: left var(--ease-speed-slow) var(--ease-ease);
   pointer-events: none;
 }
 .ease-hover-shimmer:hover::before {
@@ -149,8 +149,8 @@
 .ease-hover-squish-border {
   display: inline-block;
   transition:
-    border-radius var(--ease-transition-medium),
-    transform var(--ease-transition-medium);
+    border-radius var(--ease-speed-medium) var(--ease-ease),
+    transform var(--ease-speed-medium) var(--ease-ease);
 }
 
 .ease-hover-squish-border:hover {
@@ -163,8 +163,8 @@
 .ease-hover-morph-card {
   border-radius: 0;
   transition:
-    border-radius var(--ease-transition-medium),
-    transform var(--ease-transition-medium);
+    border-radius var(--ease-speed-medium) var(--ease-ease),
+    transform var(--ease-speed-medium) var(--ease-ease);
   will-change: border-radius, transform;
 }
 .ease-hover-morph-card:hover {

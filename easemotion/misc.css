@@ -115,7 +115,10 @@
   100% { background-position: 1000px 0; }
 }
 
-/* ease-kf-pulse-fade removed — identical to ease-kf-pulse; use ease-kf-pulse instead */
+@keyframes ease-kf-pulse-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
 
 @keyframes ease-kf-typewriter-loop {
   0% {
@@ -236,7 +239,7 @@
 
 .ease-skeleton-pulse {
   background-color: var(--ease-color-neutral-200);
-  animation: ease-kf-pulse 1.5s var(--ease-ease);
+  animation: ease-kf-pulse-fade 1.5s var(--ease-ease);
   animation-iteration-count: var(--ease-animation-iterations);
 }
 

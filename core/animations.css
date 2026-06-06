@@ -304,7 +304,17 @@
   }
 }
 
-/* ease-kf-pulse-fade removed — identical to ease-kf-pulse; use ease-kf-pulse instead */
+@keyframes ease-kf-pulse-fade {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
 
 /* Typewriter Loop Animation */
 
@@ -730,7 +740,7 @@
 
 .ease-skeleton-pulse {
   background-color: var(--ease-color-neutral-200);
-  animation: ease-kf-pulse 1.5s var(--ease-ease) infinite;
+  animation: ease-kf-pulse-fade 1.5s var(--ease-ease) infinite;
 }
 
 .ease-skeleton-block {
@@ -816,6 +826,9 @@
 }
 
 /* Looping Animations */
+:root {
+  --ease-animation-iterations: infinite;
+}
 
 .ease-bounce {
   animation: ease-kf-bounce 1s var(--ease-animation-iterations, infinite);
@@ -882,7 +895,7 @@
   z-index: 1;
   position: relative;
   transform-origin: center;
-  transition: transform var(--ease-transition-bounce-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease-bounce);
   will-change: transform;
 }
 
@@ -894,8 +907,8 @@
 /* Lift + Shadow combined hover
    Most common 'card lift' pattern — translateY with growing box-shadow */
 .ease-hover-lift-shadow {
-  transition: transform var(--ease-transition-medium),
-    box-shadow var(--ease-transition-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease),
+    box-shadow var(--ease-speed-medium) var(--ease-ease);
   will-change: transform, box-shadow;
 }
 
@@ -907,7 +920,7 @@
 
 /* Shrink on hover */
 .ease-hover-shrink {
-  transition: transform var(--ease-transition-fast);
+  transition: transform var(--ease-speed-fast) var(--ease-ease);
   will-change: transform;
 }
 
@@ -917,7 +930,7 @@
 
 /* Glow on hover */
 .ease-hover-glow {
-  transition: box-shadow var(--ease-transition-medium);
+  transition: box-shadow var(--ease-speed-medium) var(--ease-ease);
 }
 
 .ease-hover-glow:hover {
@@ -926,8 +939,8 @@
 
 /* Lift (shadow depth) on hover */
 .ease-hover-lift {
-  transition: transform var(--ease-transition-medium),
-    box-shadow var(--ease-transition-medium);
+  transition: transform var(--ease-speed-medium) var(--ease-ease),
+    box-shadow var(--ease-speed-medium) var(--ease-ease);
 }
 
 .ease-hover-lift:hover {
@@ -948,7 +961,7 @@
   width: 0;
   height: 2px;
   background-color: var(--ease-color-primary);
-  transition: width var(--ease-transition-medium);
+  transition: width var(--ease-speed-medium) var(--ease-ease);
 }
 
 .ease-hover-underline:hover::after {
@@ -992,7 +1005,7 @@
       transparent 0%,
       rgba(255, 255, 255, 0.08) 50%,
       transparent 100%);
-  transition: left var(--ease-transition-slow);
+  transition: left var(--ease-speed-slow) var(--ease-ease);
   pointer-events: none;
 }
 
@@ -1005,8 +1018,8 @@
 .ease-hover-squish-border {
   display: inline-block;
   transition:
-    border-radius var(--ease-transition-medium),
-    transform var(--ease-transition-medium);
+    border-radius var(--ease-speed-medium) var(--ease-ease),
+    transform var(--ease-speed-medium) var(--ease-ease);
 }
 
 .ease-hover-squish-border:hover {
@@ -1019,8 +1032,8 @@
 .ease-hover-morph-card {
   border-radius: 0;
   transition:
-    border-radius var(--ease-transition-medium),
-    transform var(--ease-transition-medium);
+    border-radius var(--ease-speed-medium) var(--ease-ease),
+    transform var(--ease-speed-medium) var(--ease-ease);
   will-change: border-radius, transform;
 }
 
@@ -1063,8 +1076,8 @@
 .ease-reveal {
   opacity: 0;
   transition:
-    opacity 0.7s var(--ease-ease),
-    transform 0.7s var(--ease-ease);
+    opacity 0.7s var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
+    transform 0.7s var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
   will-change: opacity, transform;
 }
 
