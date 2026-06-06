@@ -18,8 +18,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   white-space: nowrap;
-  transition: flex-basis var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-              opacity var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  transition: flex-basis var(--ease-transition-medium),
+              opacity var(--ease-transition-medium);
 }
 
 /* ── Main Content Area ──────────────────────────────────────── */
@@ -45,8 +45,8 @@
   width: 0;
   overflow: hidden;
   white-space: nowrap;
-  transition: opacity var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-              width var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  transition: opacity var(--ease-transition-medium),
+              width var(--ease-transition-medium);
 }
 
 /* ── Toggle Button ──────────────────────────────────────────── */
@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
+  transition: transform var(--ease-transition-medium);
 }
 
 .ease-sidebar-layout.ease-sidebar-collapsed .ease-sidebar-toggle {
