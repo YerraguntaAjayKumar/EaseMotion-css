@@ -25,7 +25,12 @@ function fail(message) {
   process.exit(1);
 }
 
-const rawManifest = await readFile(manifestPath, "utf8");
+let rawManifest;
+try {
+  rawManifest = await readFile(manifestPath, "utf8");
+} catch (error) {
+  fail(`could not read package.json: ${error.message}`);
+}
 let manifest;
 
 try {

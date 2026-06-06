@@ -36,7 +36,12 @@ if (process.env.GITHUB_ACTIONS === "true") {
   }
 }
 
-const originalBundle = await readFile(bundlePath, "utf8").catch(() => "");
+const originalBundle = await readFile(bundlePath, "utf8").catch((err) => {
+  if (err.code !== "ENOENT") {
+    console.warn(`Warning: could not read existing bundle (${err.code}), treating as empty.`);
+  }
+  return "";
+});
 const build = spawnSync(process.execPath, ["scripts/build-minified-css.mjs"], {
   cwd: rootDir,
   encoding: "utf8",
@@ -54,9 +59,10 @@ const rebuiltBundle = await readFile(bundlePath, "utf8");
 
 if (originalBundle !== rebuiltBundle) {
   await writeFile(bundlePath, originalBundle, "utf8");
-  throw new Error(
+  console.error(
     `${path.relative(rootDir, bundlePath)} is stale. Run \`npm run build\` and commit the regenerated bundle.`,
   );
+  process.exit(1);
 }
 
 console.log("easemotion.min.css is up to date.");

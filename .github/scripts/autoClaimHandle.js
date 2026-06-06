@@ -1,9 +1,14 @@
 // will handle /claim
 async function findExistingAssignments(github, owner, repo, username, currentIssueNumber) {
-  const { data: issues } = await github.rest.issues.listForRepo({
-    owner, repo, assignee: username, state: 'open', per_page: 100,
-  });
-  return issues.filter((issue) => !issue.pull_request && issue.number !== currentIssueNumber);
+  try {
+    const { data: issues } = await github.rest.issues.listForRepo({
+      owner, repo, assignee: username, state: 'open', per_page: 100,
+    });
+    return issues.filter((issue) => !issue.pull_request && issue.number !== currentIssueNumber);
+  } catch (error) {
+    console.error(`Failed to list existing assignments for @${username}: ${error.message}`);
+    throw error;
+  }
 }
 
 // change to increase/decrease the cap
@@ -24,9 +29,9 @@ async function handleClaim({ github, context }) {
   }
 
   const issueAuthor = context.payload.issue.user.login;
-  
+
   // can have multiple maintainers using comma ['a','b']
-  const MAINTAINERS = ['saptarshi-coder']; 
+  const MAINTAINERS = ['saptarshi-coder'];
   const isOpenedByMaintainer = MAINTAINERS.includes(issueAuthor.toLowerCase());
 
   if (!isOpenedByMaintainer && commenter.toLowerCase() !== issueAuthor.toLowerCase()) {
@@ -64,12 +69,16 @@ async function handleClaim({ github, context }) {
     return;
   }
 
-  await github.rest.issues.addAssignees({
-    owner, repo, issue_number: issueNumber, assignees: [commenter],
-  });
+  try {
+    await github.rest.issues.addAssignees({
+      owner, repo, issue_number: issueNumber, assignees: [commenter],
+    });
+  } catch (error) {
+    console.error(`Failed to assign @${commenter} to #${issueNumber}: ${error.message}`);
+    throw error;
+  }
 
-// comment message
-  const contributingUrl =`https://github.com/${owner}/${repo}/blob/main/CONTRIBUTING.md`;
+  const contributingUrl = `https://github.com/${owner}/${repo}/blob/main/CONTRIBUTING.md`;
   await github.rest.issues.createComment({
     owner, repo, issue_number: issueNumber,
     body: `🎉 **Assigned!** Welcome aboard, @${commenter}! 🌟\n\n⏳ **Timeframe:** You have **5 days** to submit a Pull Request before it becomes open for others to claim.\n\n> 💡 **Tip:** Be sure to check out our [CONTRIBUTING.md](${contributingUrl}) to get off to a great start.\n\nHappy coding! 🚀✨`,

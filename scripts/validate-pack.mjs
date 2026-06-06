@@ -1,9 +1,15 @@
 import { spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 
-const manifest = JSON.parse(
-  await readFile(new URL("../package.json", import.meta.url), "utf8"),
-);
+let manifest;
+try {
+  manifest = JSON.parse(
+    await readFile(new URL("../package.json", import.meta.url), "utf8"),
+  );
+} catch (error) {
+  console.error(`Failed to read package.json: ${error.message}`);
+  process.exit(1);
+}
 
 const pack = spawnSync("npm", ["pack", "--dry-run", "--json"], {
   encoding: "utf8",

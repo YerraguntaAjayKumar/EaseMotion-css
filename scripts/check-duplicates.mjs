@@ -14,7 +14,10 @@ const keyframePattern = /@keyframes\s+(\S+)/;
 async function readBaseline() {
   try {
     return JSON.parse(await readFile(baselinePath, "utf8"));
-  } catch {
+  } catch (err) {
+    if (err.code !== "ENOENT") {
+      console.warn(`Warning: could not load baseline file (${err.message}), using defaults.`);
+    }
     return { classes: {}, keyframes: {} };
   }
 }
@@ -33,7 +36,10 @@ async function findDuplicates() {
     let entries;
     try {
       entries = await readdir(dirPath, { withFileTypes: true });
-    } catch {
+    } catch (err) {
+      if (err.code !== "ENOENT") {
+        console.warn(`Warning: could not read directory "${dir}" (${err.message}), skipping.`);
+      }
       continue;
     }
 
@@ -107,6 +113,6 @@ async function findDuplicates() {
 }
 
 findDuplicates().catch((error) => {
-  console.error('Duplicate check failed:', error);
-  process.exitCode = 1;
+  console.error('Duplicate check failed:', error instanceof Error ? error.message : String(error));
+  process.exit(1);
 });

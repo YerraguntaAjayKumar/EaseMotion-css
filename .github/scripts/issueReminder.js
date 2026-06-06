@@ -79,10 +79,15 @@ module.exports = async ({ github, context }) => {
   ];
 
   // Post comment
-  await github.rest.issues.createComment({
-    owner,
-    repo,
-    issue_number: issueNumber,
-    body: bodyLines.join('\n'),
-  });
+  try {
+    await github.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number: issueNumber,
+      body: bodyLines.join('\n'),
+    });
+  } catch (error) {
+    console.error(`Failed to post reminder comment on #${issueNumber}: ${error.message}`);
+    throw error;
+  }
 };

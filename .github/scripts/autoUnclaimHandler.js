@@ -27,12 +27,17 @@ async function handleUnclaim({ github, context }) {
     return;
   }
 
-  await github.rest.issues.removeAssignees({
-    owner,
-    repo,
-    issue_number: issueNumber,
-    assignees: [commenter],
-  });
+  try {
+    await github.rest.issues.removeAssignees({
+      owner,
+      repo,
+      issue_number: issueNumber,
+      assignees: [commenter],
+    });
+  } catch (error) {
+    console.error(`Failed to remove assignee @${commenter} from #${issueNumber}: ${error.message}`);
+    throw error;
+  }
 
   await github.rest.issues.createComment({
     owner,
