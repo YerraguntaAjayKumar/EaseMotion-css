@@ -467,6 +467,22 @@ class DocumentationSearch {
     }
 
     /**
+     * Escape special regex characters in a string
+     */
+    escapeRegExp(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    /**
+     * Escape HTML entities to prevent XSS
+     */
+    escapeHTML(str) {
+        const div = document.createElement("div");
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+
+    /**
      * Create individual result element with highlighting
      */
     createResultElement(item, query, index) {
@@ -475,24 +491,30 @@ class DocumentationSearch {
         div.dataset.index = index;
         div.role = "option";
 
-        // Highlight matching text
+        // Highlight matching text (with escaped regex and HTML)
         const highlightText = (text) => {
-            const regex = new RegExp(`(${query})`, "gi");
-            return text.replace(regex, '<span class="search-highlight">$1</span>');
+            const safeQuery = this.escapeRegExp(query);
+            const regex = new RegExp(`(${safeQuery})`, "gi");
+            return this.escapeHTML(text).replace(
+                regex,
+                '<span class="search-highlight">$1</span>',
+            );
         };
 
         const titleMatch =
             item.title.toLowerCase().includes(query) &&
             item.title.toLowerCase().indexOf(query) !== -1;
-        const title = titleMatch ? highlightText(item.title) : item.title;
+        const title = titleMatch
+            ? highlightText(item.title)
+            : this.escapeHTML(item.title);
 
         div.innerHTML = `
       <div class="docs-search-result-title">${title}</div>
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-        <span class="docs-search-result-breadcrumb">${item.breadcrumb}</span>
-        <span class="docs-search-result-badge">${item.category}</span>
+        <span class="docs-search-result-breadcrumb">${this.escapeHTML(item.breadcrumb)}</span>
+        <span class="docs-search-result-badge">${this.escapeHTML(item.category)}</span>
       </div>
-      <div class="docs-search-result-preview">${item.content}</div>
+      <div class="docs-search-result-preview">${this.escapeHTML(item.content)}</div>
     `;
 
         // Click handler for navigation
