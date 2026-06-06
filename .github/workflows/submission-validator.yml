@@ -126,9 +126,11 @@ jobs:
       - name: Create/Update Failure Comment
         if: failure() && steps.validate.outputs.hasFailures == 'true'
         uses: actions/github-script@v7
+        env:
+          VALIDATION_FAILURES: ${{ steps.validate.outputs.failures }}
         with:
           script: |
-            const failures = JSON.parse(`${{ steps.validate.outputs.failures }}`);
+            const failures = JSON.parse(process.env.VALIDATION_FAILURES);
             
             let commentBody = `## ❌ Submission Validation Failed\n\n`;
             commentBody += `Thank you for your contribution! However, some required files are missing.\n\n`;
@@ -209,9 +211,11 @@ jobs:
       - name: Create/Update Success Comment
         if: success() && steps.validate.outputs.hasFailures == 'false' && steps.validate.outputs.successes != '[]'
         uses: actions/github-script@v7
+        env:
+          VALIDATION_SUCCESSES: ${{ steps.validate.outputs.successes }}
         with:
           script: |
-            const successes = JSON.parse(`${{ steps.validate.outputs.successes }}`);
+            const successes = JSON.parse(process.env.VALIDATION_SUCCESSES);
             
             let commentBody = `## ✅ Submission Validation Passed!\n\n`;
             commentBody += `Great job! All required files are present.\n\n`;

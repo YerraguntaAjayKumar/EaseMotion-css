@@ -44,27 +44,26 @@ jobs:
           console.log(`${fileBuffer.length},${zlib.gzipSync(fileBuffer).length},${zlib.brotliCompressSync(fileBuffer).length}`);
           EOF
 
-      - name: Fetch PR Branch
-        run: |
-          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
-
-      - name: Measure PR Branch
-        run: |
-          git checkout pr-branch -- core components easemotion.css || true
-          npm run build || true
-          SIZES=$(node measure.mjs)
-          echo "PR_RAW=$(echo $SIZES | cut -d',' -f1)" >> $GITHUB_ENV
-          echo "PR_GZIP=$(echo $SIZES | cut -d',' -f2)" >> $GITHUB_ENV
-          echo "PR_BROTLI=$(echo $SIZES | cut -d',' -f3)" >> $GITHUB_ENV
-
       - name: Measure Base Branch
         run: |
-          git checkout HEAD -- core components easemotion.css || true
           npm run build || true
           SIZES=$(node measure.mjs)
           echo "MAIN_RAW=$(echo $SIZES | cut -d',' -f1)" >> $GITHUB_ENV
           echo "MAIN_GZIP=$(echo $SIZES | cut -d',' -f2)" >> $GITHUB_ENV
           echo "MAIN_BROTLI=$(echo $SIZES | cut -d',' -f3)" >> $GITHUB_ENV
+
+      - name: Fetch PR CSS files only (no scripts)
+        run: |
+          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
+          git checkout pr-branch -- core/ components/ easemotion.css || true
+
+      - name: Measure PR Branch
+        run: |
+          npm run build || true
+          SIZES=$(node measure.mjs)
+          echo "PR_RAW=$(echo $SIZES | cut -d',' -f1)" >> $GITHUB_ENV
+          echo "PR_GZIP=$(echo $SIZES | cut -d',' -f2)" >> $GITHUB_ENV
+          echo "PR_BROTLI=$(echo $SIZES | cut -d',' -f3)" >> $GITHUB_ENV
 
       - name: Post Comment on PR
         uses: actions/github-script@v7
