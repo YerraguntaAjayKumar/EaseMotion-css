@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ease-image-gallery — EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      padding: 32px 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle { color: #94a3b8; }
+    }
+    section {
+      margin-bottom: 48px;
+    }
+    section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #6366f1;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .note { color: #94a3b8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ease-image-gallery</h1>
+    <p class="subtitle">Responsive image gallery with grid, masonry, and hover zoom effects</p>
+
+    <!-- Standard Grid Gallery -->
+    <section>
+      <h2>Standard Grid (3 columns)</h2>
+      <div class="ease-image-gallery ease-image-gallery--grid">
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery1/600/400" alt="Gallery image 1">
+          <div class="ease-image-gallery__overlay">
+            <h3>Mountain View</h3>
+            <p>Beautiful landscape</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery2/600/500" alt="Gallery image 2">
+          <div class="ease-image-gallery__overlay">
+            <h3>Ocean Sunset</h3>
+            <p>Golden hour</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery3/600/450" alt="Gallery image 3">
+          <div class="ease-image-gallery__overlay">
+            <h3>Forest Trail</h3>
+            <p>Nature walk</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery4/600/400" alt="Gallery image 4">
+          <div class="ease-image-gallery__overlay">
+            <h3>City Lights</h3>
+            <p>Urban skyline</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery5/600/550" alt="Gallery image 5">
+          <div class="ease-image-gallery__overlay">
+            <h3>Desert Dunes</h3>
+            <p>Sand formations</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/gallery6/600/400" alt="Gallery image 6">
+          <div class="ease-image-gallery__overlay">
+            <h3>Winter Snow</h3>
+            <p>Cold beauty</p>
+          </div>
+        </div>
+      </div>
+      <p class="note">Hover over images to see the zoom effect and overlay</p>
+    </section>
+
+    <!-- Masonry Gallery -->
+    <section>
+      <h2>Masonry Layout (variable heights)</h2>
+      <div class="ease-image-gallery ease-image-gallery--masonry">
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry1/400/600" alt="Masonry image 1">
+          <div class="ease-image-gallery__overlay">
+            <h3>Tall Portrait</h3>
+            <p>Vertical composition</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry2/400/300" alt="Masonry image 2">
+          <div class="ease-image-gallery__overlay">
+            <h3>Wide Shot</h3>
+            <p>Panoramic view</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry3/400/500" alt="Masonry image 3">
+          <div class="ease-image-gallery__overlay">
+            <h3>Medium Height</h3>
+            <p>Balanced frame</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry4/400/350" alt="Masonry image 4">
+          <div class="ease-image-gallery__overlay">
+            <h3>Square-ish</h3>
+            <p>Classic ratio</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry5/400/450" alt="Masonry image 5">
+          <div class="ease-image-gallery__overlay">
+            <h3>Nature Detail</h3>
+            <p>Close up</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry6/400/400" alt="Masonry image 6">
+          <div class="ease-image-gallery__overlay">
+            <h3>Perfect Square</h3>
+            <p>Symmetrical</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry7/400/550" alt="Masonry image 7">
+          <div class="ease-image-gallery__overlay">
+            <h3>Dramatic</h3>
+            <p>High contrast</p>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/masonry8/400/320" alt="Masonry image 8">
+          <div class="ease-image-gallery__overlay">
+            <h3>Minimal</h3>
+            <p>Clean lines</p>
+          </div>
+        </div>
+      </div>
+      <p class="note">Masonry layout accommodates images of varying heights naturally</p>
+    </section>
+
+    <!-- Compact Grid (4 columns) -->
+    <section>
+      <h2>Compact Grid (4 columns)</h2>
+      <div class="ease-image-gallery ease-image-gallery--grid ease-image-gallery--compact">
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact1/400/300" alt="Compact image 1">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 1</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact2/400/300" alt="Compact image 2">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 2</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact3/400/300" alt="Compact image 3">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 3</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact4/400/300" alt="Compact image 4">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 4</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact5/400/300" alt="Compact image 5">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 5</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact6/400/300" alt="Compact image 6">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 6</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact7/400/300" alt="Compact image 7">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 7</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/compact8/400/300" alt="Compact image 8">
+          <div class="ease-image-gallery__overlay">
+            <h3>Item 8</h3>
+          </div>
+        </div>
+      </div>
+      <p class="note">Denser layout for showcasing more images in less space</p>
+    </section>
+
+    <!-- No Overlay Variant -->
+    <section>
+      <h2>Hover Zoom Only (no overlay)</h2>
+      <div class="ease-image-gallery ease-image-gallery--grid ease-image-gallery--no-overlay">
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay1/600/400" alt="No overlay 1">
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay2/600/400" alt="No overlay 2">
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay3/600/400" alt="No overlay 3">
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay4/600/400" alt="No overlay 4">
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay5/600/400" alt="No overlay 5">
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/nooverlay6/600/400" alt="No overlay 6">
+        </div>
+      </div>
+      <p class="note">Clean hover effect without text overlay for pure visual galleries</p>
+    </section>
+
+    <!-- Rounded Variant -->
+    <section>
+      <h2>Rounded Corners</h2>
+      <div class="ease-image-gallery ease-image-gallery--grid ease-image-gallery--rounded">
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/rounded1/600/400" alt="Rounded 1">
+          <div class="ease-image-gallery__overlay">
+            <h3>Soft Edges</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/rounded2/600/400" alt="Rounded 2">
+          <div class="ease-image-gallery__overlay">
+            <h3>Modern Look</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/rounded3/600/400" alt="Rounded 3">
+          <div class="ease-image-gallery__overlay">
+            <h3>Friendly UI</h3>
+          </div>
+        </div>
+        <div class="ease-image-gallery__item">
+          <img src="https://picsum.photos/seed/rounded4/600/400" alt="Rounded 4">
+          <div class="ease-image-gallery__overlay">
+            <h3>Playful</h3>
+          </div>
+        </div>
+      </div>
+      <p class="note">Softer, more approachable aesthetic with rounded corners</p>
+    </section>
+  </div>
+</body>
+</html>
