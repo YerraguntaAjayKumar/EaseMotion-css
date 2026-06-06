@@ -27,11 +27,11 @@
   text-decoration: none;
 
   transition:
-    background-color var(--ease-speed-fast, 150ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    color            var(--ease-speed-fast, 150ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    border-color     var(--ease-speed-fast, 150ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    box-shadow       var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    transform        var(--ease-speed-fast, 150ms) var(--ease-ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1));
+    background-color var(--ease-transition-fast),
+    color            var(--ease-transition-fast),
+    border-color     var(--ease-transition-fast),
+    box-shadow       var(--ease-transition-medium),
+    transform        var(--ease-transition-bounce-fast);
 }
 
 .ease-btn:active {
@@ -231,10 +231,10 @@
 
 .ease-btn-hover {
   transition:
-    transform    var(--ease-speed-medium, 300ms) var(--ease-ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1)),
-    box-shadow   var(--ease-speed-medium, 300ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    background-color var(--ease-speed-fast, 150ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1)),
-    border-color     var(--ease-speed-fast, 150ms) var(--ease-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    transform        var(--ease-transition-bounce-medium),
+    box-shadow       var(--ease-transition-medium),
+    background-color var(--ease-transition-fast),
+    border-color     var(--ease-transition-fast);
 }
 
 @media (hover: hover) and (pointer: fine) {
